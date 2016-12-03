@@ -1,0 +1,6 @@
+# ignore virtualenv
+backend/flask/bin
+backend/flask/include
+backend/flask/lib
+backend/flask/pip-selfcheck.json
+backend/flask/.Python
