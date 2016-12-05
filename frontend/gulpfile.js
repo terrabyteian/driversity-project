@@ -16,7 +16,11 @@ var nodemon = require('nodemon');
 var livereload = require('gulp-livereload');
 
 var PATH = {
-  SCSS_SRC : ["src/scss/*.scss", "src/components/**/*.scss"],
+  SCSS_SRC : ["src/scss/*.scss", "src/components/**/*.scss",
+              "node_modules/react-virtualized-select/**/*.css",
+              "node_modules/react-select/**/*.css"
+  		
+             ],
   SCSS_OUT_DEV : "public/dev",
   SCSS_OUT_PROD : "public/dist",
   CSS_NAME_DEV : 'styles.css',
