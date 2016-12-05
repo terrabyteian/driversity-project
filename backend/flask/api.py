@@ -5,7 +5,10 @@ import json
 from bson import ObjectId
 from bson.json_util import dumps
 
+from flask_cors import CORS, cross_origin
+
 app = Flask(__name__)
+CORS(app)
 client = MongoClient() 
 db = client.driversity
 
