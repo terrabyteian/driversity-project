@@ -18,7 +18,9 @@ var livereload = require('gulp-livereload');
 var PATH = {
   SCSS_SRC : ["src/scss/*.scss", "src/components/**/*.scss",
               "node_modules/react-virtualized-select/**/*.css",
-              "node_modules/react-select/**/*.css"
+              "node_modules/react-select/**/*.css",
+	      "node_modules/bootstrap/dist/css/bootstrap.min.css",
+	      "node_modules/fixed-data-table/dist/fixed-data-table.min.css"
   		
              ],
   SCSS_OUT_DEV : "public/dev",

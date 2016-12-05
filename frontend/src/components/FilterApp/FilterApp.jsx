@@ -1,8 +1,9 @@
 import React from 'react';
 import $ from 'jquery';
 import VirtualizedSelect from 'react-virtualized-select'
-import {labelify} from '../js/helpers'
-
+import {labelify,delabelify} from '../js/helpers'
+import {Col} from 'react-bootstrap'
+import TripsTable from './TripsTable'
 
 class FilterApp extends React.Component {
   constructor() {
@@ -11,7 +12,10 @@ class FilterApp extends React.Component {
   
   state = {
     clients:[],
-    selectedClients:[],
+    selectedClient:{},
+    users:[],
+    selectedUser:{},
+    trips: []
   };
 
   getClients(){
@@ -28,18 +32,61 @@ class FilterApp extends React.Component {
     });
   }
 
+  getUsers(){
+    $.ajax({
+      url: this.props.get_users_api + '/' + delabelify(this.state.selectedClient),
+      dataType: 'json',
+      cache: false,
+      success: function(data){
+        this.setState({users:labelify(data)});
+      }.bind(this),
+      error: function(xhr,status,err){
+        console.error(this.props.get_users_api,status,err.toString());
+      }.bind(this)
+    });
+  }
+
+  getTrips(){
+    $.ajax({
+      url: this.props.get_trips_api + '/' + delabelify(this.state.selectedUser),
+      dataType: 'json',
+      cache: false,
+      success: function(data){
+        this.setState({trips:data});
+      }.bind(this),
+      error: function(xhr,status,err){
+        console.error(this.props.get_trips_api,status,err.toString());
+      }.bind(this)
+    });
+  }
+
   componentDidMount(){
     ::this.getClients();
   }
 
-  handleClientChange(values){
-    this.setState({selectedClients:values});
+  handleClientChange(selectValue){
+    this.setState({selectedClient:selectValue,selectedUser:{}},this.getUsers);
+  }
+
+  handleUserChange(value){
+    this.setState({selectedUser:value},this.getTrips);
   }
 
   render() {
     return (
       <div>
-	      <VirtualizedSelect multi={true} value={this.state.selectedClients} options={this.state.clients} simpleValue={false} onChange={::this.handleClientChange} />
+	      <Col sm={6} md={6}>
+		      <h3>Client</h3>
+		      <VirtualizedSelect multi={false} value={this.state.selectedClient} options={this.state.clients} simpleValue={false} onChange={::this.handleClientChange} />
+	      </Col>
+	      <Col sm={6} md={6}>
+		      <h3>User</h3>
+		      <VirtualizedSelect multi={false} value={this.state.selectedUser} options={this.state.users} simpleValue={false} onChange={::this.handleUserChange} />
+	      </Col>
+	      <Col sm={12} md={12}><br/><hr/><br/></Col>
+	      <Col sm={12} md={12}>
+	      	      <TripsTable data={this.state.trips}/>
+	      </Col>
       </div>
     )
   }
@@ -47,7 +94,9 @@ class FilterApp extends React.Component {
 }
 
 FilterApp.defaultProps = {
-	get_clients_api:"http://0.0.0.0:5000/clients"
+	get_clients_api:"http://0.0.0.0:5000/clients",
+	get_users_api:"http://0.0.0.0:5000/users",
+	get_trips_api:"http://0.0.0.0:5000/trips"
 }
 
 export default FilterApp;

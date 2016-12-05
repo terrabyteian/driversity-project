@@ -10,3 +10,12 @@ export function labelify(arr){
 	}
 	return newarr;
 }
+
+// Convert back to list
+export function delabelify(arr){
+	/*var newarr = [];
+	for (var i = 0; i< arr.length; i++){
+		newarr.push(arr[i]['value']);
+	}*/
+	return arr['value'];
+}
