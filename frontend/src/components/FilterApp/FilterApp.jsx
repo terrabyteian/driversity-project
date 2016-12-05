@@ -83,7 +83,9 @@ class FilterApp extends React.Component {
 		      <h3>User</h3>
 		      <VirtualizedSelect multi={false} value={this.state.selectedUser} options={this.state.users} simpleValue={false} onChange={::this.handleUserChange} />
 	      </Col>
-	      <Col sm={12} md={12}><br/><hr/><br/></Col>
+	      <Col sm={12} md={12}><br/><hr/><br/>
+		      <h3>Average Score: <small></small></h3>
+	      </Col>
 	      <Col sm={12} md={12}>
 	      	      <TripsTable data={this.state.trips}/>
 	      </Col>
