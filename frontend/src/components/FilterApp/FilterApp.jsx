@@ -1,6 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 import VirtualizedSelect from 'react-virtualized-select'
+import {labelify} from '../js/helpers'
 
 
 class FilterApp extends React.Component {
@@ -9,7 +10,8 @@ class FilterApp extends React.Component {
   }
   
   state = {
-    clients:[]
+    clients:[],
+    selectedClients:[],
   };
 
   getClients(){
@@ -18,7 +20,7 @@ class FilterApp extends React.Component {
       dataType: 'json',
       cache: false,
       success: function(data){
-        this.setState({clients:data});
+        this.setState({clients:labelify(data)});
       }.bind(this),
       error: function(xhr,status,err){
         console.error(this.props.get_clients_api,status,err.toString());
@@ -30,10 +32,14 @@ class FilterApp extends React.Component {
     ::this.getClients();
   }
 
+  handleClientChange(values){
+    this.setState({selectedClients:values});
+  }
+
   render() {
     return (
       <div>
-        Foobar
+	      <VirtualizedSelect multi={true} value={this.state.selectedClients} options={this.state.clients} simpleValue={false} onChange={::this.handleClientChange} />
       </div>
     )
   }
