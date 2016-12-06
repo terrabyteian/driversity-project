@@ -4,6 +4,7 @@ import VirtualizedSelect from 'react-virtualized-select'
 import {labelify,delabelify} from '../js/helpers'
 import {Col} from 'react-bootstrap'
 import TripsTable from './TripsTable'
+import ip from 'ip'
 
 class FilterApp extends React.Component {
   constructor() {
@@ -73,7 +74,7 @@ class FilterApp extends React.Component {
   }
 
   render() {
-    return (
+   return (
       <div>
 	      <Col sm={6} md={6}>
 		      <h3>Client</h3>
@@ -90,15 +91,15 @@ class FilterApp extends React.Component {
 	      	      <TripsTable data={this.state.trips}/>
 	      </Col>
       </div>
-    )
+  )
   }
 
 }
 
 FilterApp.defaultProps = {
-	get_clients_api:"http://0.0.0.0:5000/clients",
-	get_users_api:"http://0.0.0.0:5000/users",
-	get_trips_api:"http://0.0.0.0:5000/trips"
+	get_clients_api:"http://"+ip.address()+":5000/clients",
+	get_users_api:"http://"+ip.address()+":5000/users",
+	get_trips_api:"http://"+ip.address()+":5000/trips",
 }
 
 export default FilterApp;
