@@ -78,4 +78,4 @@ def get_events(trip_id):
         return custom_dumps(doc['events'])
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host='0.0.0.0')

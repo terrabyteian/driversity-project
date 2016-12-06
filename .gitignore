@@ -1,3 +1,4 @@
 # ignore virtualenv
 backend/virtualenv
 node_modules
+*.csv

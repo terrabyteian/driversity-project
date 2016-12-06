@@ -27,11 +27,18 @@ RUN apt-get update && apt-get install -y openssh-server apache2 supervisor
 RUN mkdir -p /var/lock/apache2 /var/run/apache2 /var/run/sshd /var/log/supervisor
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
+# Copy over the CSV files
+RUN mkdir -p /root/Driversity
+COPY users.csv /root/Driversity/users.csv
+COPY events.csv /root/Driversity/events.csv
+COPY trips.csv /root/Driversity/trips.csv
+
 # Install the code and set up flask/node
 RUN cd /opt && wget https://github.com/terrabyteian/driversity-project/archive/master.zip
 RUN cd /opt && unzip master.zip
 RUN cd /opt/driversity-project-master/frontend/ && npm install
 RUN cd /opt/driversity-project-master/backend/flask && pip install -r requirements.txt
+RUN mongod --fork --logpath /var/log/mongod.log && cd /opt/driversity-project-master/backend && python load_csv_into_mongo.py
 
 # expose frontend and start up supervisor
 EXPOSE 5000 8080
