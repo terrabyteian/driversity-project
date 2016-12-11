@@ -5,6 +5,7 @@ import {labelify,delabelify} from '../js/helpers'
 import {Col} from 'react-bootstrap'
 import TripsTable from './TripsTable'
 import TripMap from './TripMap'
+import TripMap2 from './TripMap2'
 import ip from 'ip'
 
 class FilterApp extends React.Component {
@@ -91,7 +92,7 @@ class FilterApp extends React.Component {
 	      <Col sm={12} md={12}>
 	      	      <TripsTable data={this.state.trips}/>
 	      </Col>
-	      <TripMap />
+	      <TripMap2 />
       </div>
   )
   }
