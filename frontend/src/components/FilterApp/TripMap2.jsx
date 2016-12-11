@@ -6,7 +6,7 @@ const coords = {
   lng: -0.08040660000006028
 };
 
-export default class TripMap2 extends React.Component {
+class TripMap2 extends React.Component {
 onMapCreated(map) {
 map.setOptions({
 disableDefaultUI: true
@@ -55,3 +55,5 @@ return (
 );
 }
 }
+
+export default TripMap2;

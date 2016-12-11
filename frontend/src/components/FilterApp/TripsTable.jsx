@@ -18,7 +18,7 @@ return (
 	headerHeight={50}>
 	<Column
 		header={<Cell>ID</Cell>}
-		cell={props => (<Cell {...props}l>{this.props.data[props.rowIndex]["_id"]}</Cell>)}
+		cell={props => (<Cell {...props}l><a href="" onclick={this.props.onSelect(this.props.data[props.rowIndex]["_id"])}>{this.props.data[props.rowIndex]["_id"]}</a></Cell>)}
 		fixed={true}
 		width={400}
 	/>

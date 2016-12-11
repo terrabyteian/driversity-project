@@ -18,7 +18,9 @@ class FilterApp extends React.Component {
     selectedClient:{},
     users:[],
     selectedUser:{},
-    trips: []
+    trips: [],
+    selectedTrip:'',
+    selectedEvents: []
   };
 
   getClients(){
@@ -63,6 +65,20 @@ class FilterApp extends React.Component {
     });
   }
 
+  getEvents(){
+    $.ajax({
+      url: this.props.get_events_api + '/' + this.state.selectedTrip,
+      dataType: 'json',
+      cache: false,
+      success: function(data){
+        this.setState({events:data});
+      }.bind(this),
+      error: function(xhr,status,err){
+        console.error(this.props.get_trips_api,status,err.toString());
+      }.bind(this)
+    });
+  }
+
   componentDidMount(){
     ::this.getClients();
   }
@@ -73,6 +89,10 @@ class FilterApp extends React.Component {
 
   handleUserChange(value){
     this.setState({selectedUser:value},this.getTrips);
+  }
+
+  handleTripChange(value){
+    this.setState({selectedTrip:value},this.getEvents);
   }
 
   render() {
@@ -90,7 +110,7 @@ class FilterApp extends React.Component {
 		      <h3>Average Score: <small></small></h3>
 	      </Col>
 	      <Col sm={12} md={12}>
-	      	      <TripsTable data={this.state.trips}/>
+	      	      <TripsTable onSelect={::this.handleTripChange} data={this.state.trips}/>
 	      </Col>
 	      <TripMap2 />
       </div>
@@ -103,6 +123,7 @@ FilterApp.defaultProps = {
 	get_clients_api:"http://"+ip.address()+":5000/clients",
 	get_users_api:"http://"+ip.address()+":5000/users",
 	get_trips_api:"http://"+ip.address()+":5000/trips",
+	get_events_api:"http://"+ip.address()+":5000/events",
 }
 
 export default FilterApp;
