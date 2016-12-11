@@ -4,6 +4,7 @@ import VirtualizedSelect from 'react-virtualized-select'
 import {labelify,delabelify} from '../js/helpers'
 import {Col} from 'react-bootstrap'
 import TripsTable from './TripsTable'
+import TripMap from './TripMap'
 import ip from 'ip'
 
 class FilterApp extends React.Component {
@@ -90,6 +91,7 @@ class FilterApp extends React.Component {
 	      <Col sm={12} md={12}>
 	      	      <TripsTable data={this.state.trips}/>
 	      </Col>
+	      <TripMap />
       </div>
   )
   }
