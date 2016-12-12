@@ -20,7 +20,7 @@ class FilterApp extends React.Component {
     selectedUser:{},
     trips: [],
     selectedTrip:'',
-    selectedEvents: []
+    events: []
   };
 
   getClients(){
@@ -112,7 +112,7 @@ class FilterApp extends React.Component {
 	      <Col sm={12} md={12}>
 	      	      <TripsTable onSelect={::this.handleTripChange} data={this.state.trips}/>
 	      </Col>
-	      <TripMap2 />
+	      <TripMap2 events={this.state.events}/>
       </div>
   )
   }

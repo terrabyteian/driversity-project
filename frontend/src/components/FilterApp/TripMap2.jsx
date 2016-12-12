@@ -26,7 +26,31 @@ console.log('onClick', e);
 }
 
 render() {
+if (this.props.events.length > 0){
+var markers = this.props.events.map(function(ev,idx){
+	return (
+		<Marker
+			key={idx}
+			lat={ev['geo_lat']}
+			lng={ev['geo_long']}
+			draggable={false} />
+	);
+});
+var midIndex = Math.floor(this.props.events.length / 2);
 return (
+<Gmaps
+	width={'1050px'}
+	height={'600px'}
+	lat={this.props.events[midIndex]['geo_lat']}
+	lng={this.props.events[midIndex]['geo_long']}
+	zoom={12}
+	loadingMessage={'Loading map...'}
+	params={{v: '3.exp', key: 'AIzaSyDcx3ptW3iGNmo-Yv8jHnVun1KjQAUqlCA'}}
+	onMapCreated={this.onMapCreated}>
+	{ markers }
+</Gmaps>
+);
+/*return (
 <Gmaps
 	width={'800px'}
 	height={'600px'}
@@ -52,7 +76,9 @@ return (
 		radius={500}
 		onClick={this.onClick} />
 </Gmaps>
-);
+);*/
+}
+return (<div></div>);
 }
 }
 
