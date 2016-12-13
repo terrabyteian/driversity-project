@@ -1,9 +1,9 @@
 import React from 'react';
-import {Gmaps, Marker, InfoWindow, Circle} from 'react-gmaps';
+import {Gmaps, Marker, InfoWindow, Circle, Polyline} from 'react-gmaps';
 
 const coords = {
-  lat: 51.5258541,
-  lng: -0.08040660000006028
+lat: 51.5258541,
+lng: -0.08040660000006028
 };
 
 class TripMap2 extends React.Component {
@@ -28,13 +28,17 @@ console.log('onClick', e);
 render() {
 if (this.props.events.length > 0){
 var markers = this.props.events.map(function(ev,idx){
-	return (
-		<Marker
-			key={idx}
-			lat={ev['geo_lat']}
-			lng={ev['geo_long']}
-			draggable={false} />
-	);
+return (
+<Marker
+	key={idx}
+	lat={ev['geo_lat']}
+	lng={ev['geo_long']}
+	draggable={false} />
+);
+});
+var path = this.props.events.map(function(ev,idx){
+	console.log(ev);
+	return {lat: parseFloat(ev['geo_lat']), lng: parseFloat(ev['geo_long'])};
 });
 var midIndex = Math.floor(this.props.events.length / 2);
 return (
@@ -47,34 +51,35 @@ return (
 	loadingMessage={'Loading map...'}
 	params={{v: '3.exp', key: 'AIzaSyDcx3ptW3iGNmo-Yv8jHnVun1KjQAUqlCA'}}
 	onMapCreated={this.onMapCreated}>
-	{ markers }
+	<Polyline
+		path={path} />
 </Gmaps>
 );
 /*return (
 <Gmaps
-	width={'800px'}
-	height={'600px'}
-	lat={coords.lat}
-	lng={coords.lng}
-	zoom={12}
-	loadingMessage={'Be happy'}
-	params={{v: '3.exp', key: 'AIzaSyDcx3ptW3iGNmo-Yv8jHnVun1KjQAUqlCA'}}
-	onMapCreated={this.onMapCreated}>
-	<Marker
-		lat={coords.lat}
-		lng={coords.lng}
-		draggable={true}
-		onDragEnd={this.onDragEnd} />
-	<InfoWindow
-		lat={coords.lat}
-		lng={coords.lng}
-		content={'Hello, React :)'}
-		onCloseClick={this.onCloseClick} />
-	<Circle
-		lat={coords.lat}
-		lng={coords.lng}
-		radius={500}
-		onClick={this.onClick} />
+width={'800px'}
+height={'600px'}
+lat={coords.lat}
+lng={coords.lng}
+zoom={12}
+loadingMessage={'Be happy'}
+params={{v: '3.exp', key: 'AIzaSyDcx3ptW3iGNmo-Yv8jHnVun1KjQAUqlCA'}}
+onMapCreated={this.onMapCreated}>
+<Marker
+lat={coords.lat}
+lng={coords.lng}
+draggable={true}
+onDragEnd={this.onDragEnd} />
+<InfoWindow
+lat={coords.lat}
+lng={coords.lng}
+content={'Hello, React :)'}
+onCloseClick={this.onCloseClick} />
+<Circle
+lat={coords.lat}
+lng={coords.lng}
+radius={500}
+onClick={this.onClick} />
 </Gmaps>
 );*/
 }

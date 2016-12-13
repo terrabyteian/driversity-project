@@ -75,7 +75,7 @@ def get_events(trip_id):
     cursor = db.trips.find({'_id':ObjectId(trip_id)})
     docs = []
     for doc in cursor:
-        return custom_dumps(doc['events'])
+        return custom_dumps(sorted(doc['events'],key=lambda k: k['event_ts']))
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
