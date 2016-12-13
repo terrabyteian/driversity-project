@@ -109,10 +109,10 @@ class FilterApp extends React.Component {
 	      <Col sm={12} md={12}><br/><hr/><br/>
 		      <h3>Average Score: <small></small></h3>
 	      </Col>
-	      <Col sm={12} md={12}>
+	      <Col sm={5} md={5}>
 	      	      <TripsTable onSelect={::this.handleTripChange} data={this.state.trips}/>
 	      </Col>
-	      <TripMap2 events={this.state.events}/>
+	      <Col sm={7} md={7}><TripMap2 events={this.state.events}/></Col>
       </div>
   )
   }

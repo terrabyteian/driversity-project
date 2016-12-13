@@ -13,12 +13,12 @@ return (
 <Table
 	rowHeight={50}
 	rowsCount={this.props.data.length}
-	width={1050}
+	width={550}
 	height={500}
 	headerHeight={50}>
 	<Column
 		header={<Cell>ID</Cell>}
-		cell={props => (<Cell {...props}l><a href="#" onClick={() => this.props.onSelect(this.props.data[props.rowIndex]["_id"])}>{this.props.data[props.rowIndex]["_id"]}</a></Cell>)}
+		cell={props => (<Cell {...props}l><a href="javascript:void(0)" onClick={() => this.props.onSelect(this.props.data[props.rowIndex]["_id"])}>{this.props.data[props.rowIndex]["_id"]}</a></Cell>)}
 		fixed={true}
 		width={250}
 	/>
@@ -39,30 +39,6 @@ return (
 		cell={props => (<Cell {...props}l>{this.props.data[props.rowIndex]["distance"]}</Cell>)}
 		fixed={true}
 		width={100}
-	/>
-	<Column
-		header={<Cell>Start Time (Local)</Cell>}
-		cell={props => (<Cell {...props}l>{this.props.data[props.rowIndex]["start_time_local"]}</Cell>)}
-		fixed={true}
-		width={100}
-	/>
-	<Column
-		header={<Cell>End Time (Local)</Cell>}
-		cell={props => (<Cell {...props}l>{this.props.data[props.rowIndex]["end_time_local"]}</Cell>)}
-		fixed={true}
-		width={100}
-	/>
-	<Column
-		header={<Cell>Start Time</Cell>}
-		cell={props => (<Cell {...props}l>{this.props.data[props.rowIndex]["start_time"]}</Cell>)}
-		fixed={true}
-		width={150}
-	/>
-	<Column
-		header={<Cell>End Time</Cell>}
-		cell={props => (<Cell {...props}l>{this.props.data[props.rowIndex]["end_time"]}</Cell>)}
-		fixed={true}
-		width={150}
 	/>
 </Table>
 );
