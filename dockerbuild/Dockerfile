@@ -37,6 +37,7 @@ COPY trips.csv /root/Driversity/trips.csv
 RUN cd /opt && wget https://github.com/terrabyteian/driversity-project/archive/master.zip
 RUN cd /opt && unzip master.zip
 RUN cd /opt/driversity-project-master/frontend/ && npm install
+RUN cd /opt/driversity-project-master/frontend/node_modules/react-gmaps/ && wget https://github.com/tristandb/react-gmaps/archive/master.zip && unzip master.zip && cp -r react-gmaps-master/dist .
 RUN cd /opt/driversity-project-master/backend/flask && pip install -r requirements.txt
 RUN mongod --fork --logpath /var/log/mongod.log && cd /opt/driversity-project-master/backend && python load_csv_into_mongo.py
 
