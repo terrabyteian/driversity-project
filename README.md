@@ -5,9 +5,9 @@
 I've update the code to include the following features:
 
 * Upon selecting a user/client you get the average score of that user
-** This table is using Facebook's debut open-source React componet called fixed-data-table. It can ingest large sets of data but it will only render the contents that are currently on your screen. This means that, if a user has a  large number of trips, the DOM will not slow down as a result. 
+	* This table is using Facebook's debut open-source React componet called fixed-data-table. It can ingest large sets of data but it will only render the contents that are currently on your screen. This means that, if a user has a  large number of trips, the DOM will not slow down as a result. 
 * Upon selecting one of the user's trips you're given a map with the trip drawn out and notable events marked with a message
-** This map uses the Google Maps API combined with an open-source maps component for React to render the Map. I'm using my personal Google API key to tap into this information.
+	* This map uses the Google Maps API combined with an open-source maps component for React to render the Map. I'm using my personal Google API key to tap into this information.
 * Next to the map you get some general information about the trip (how many times caught speeding/using phone etc.)
 
 I had some deeper ideas about the actual analytics behind this data, but I feel the sample data combined with time frame was not enough to implement most of those things. I think a separate backend analytics engine would be ideal to provide more mathematically-heavy analysis of the information. Here are some of my ideas on these things:
