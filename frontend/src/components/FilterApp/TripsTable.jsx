@@ -13,26 +13,26 @@ return (
 <Table
 	rowHeight={50}
 	rowsCount={this.props.data.length}
-	width={550}
+	width={425}
 	height={500}
 	headerHeight={50}>
 	<Column
 		header={<Cell>ID</Cell>}
-		cell={props => (<Cell {...props}l><a href="javascript:void(0)" onClick={() => this.props.onSelect(this.props.data[props.rowIndex]["_id"])}>{this.props.data[props.rowIndex]["_id"]}</a></Cell>)}
+		cell={props => (<Cell {...props}l><a href="javascript:void(0)" onClick={() => this.props.onSelect(this.props.data[props.rowIndex]["_id"],props.rowIndex)}>{this.props.data[props.rowIndex]["_id"]}</a></Cell>)}
 		fixed={true}
-		width={250}
+		width={200}
 	/>
 	<Column
 		header={<Cell>Score</Cell>}
 		cell={props => (<Cell {...props}l>{this.props.data[props.rowIndex]["score"]}</Cell>)}
 		fixed={true}
-		width={100}
+		width={50}
 	/>
 	<Column
 		header={<Cell>Duration (mins)</Cell>}
 		cell={props => (<Cell {...props}l>{this.props.data[props.rowIndex]["duration"]}</Cell>)}
 		fixed={true}
-		width={100}
+		width={75}
 	/>
 	<Column
 		header={<Cell>Distance (meters)</Cell>}

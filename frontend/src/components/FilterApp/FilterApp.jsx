@@ -20,7 +20,8 @@ class FilterApp extends React.Component {
     selectedUser:{},
     trips: [],
     selectedTrip:'',
-    events: []
+    events: [],
+    average:0
   };
 
   getClients(){
@@ -57,7 +58,13 @@ class FilterApp extends React.Component {
       dataType: 'json',
       cache: false,
       success: function(data){
-        this.setState({trips:data});
+	var score = 0;
+           for (let i=0; i<data.length; i++){
+	    if (data[i]['score'] !== ""){
+               score+=parseFloat(data[i]['score']);
+            }
+	}
+	this.setState({trips:data,average:(score/data.length).toFixed(2)});
       }.bind(this),
       error: function(xhr,status,err){
         console.error(this.props.get_trips_api,status,err.toString());
@@ -88,11 +95,11 @@ class FilterApp extends React.Component {
   }
 
   handleUserChange(value){
-    this.setState({selectedUser:value},this.getTrips);
+    this.setState({selectedUser:value,events:[]},this.getTrips);
   }
 
-  handleTripChange(value){
-    this.setState({selectedTrip:value},this.getEvents);
+  handleTripChange(value,idx){
+    this.setState({selectedTrip:value,selectedTripObj:this.state.trips[idx]},this.getEvents);
   }
 
   render() {
@@ -107,12 +114,14 @@ class FilterApp extends React.Component {
 		      <VirtualizedSelect multi={false} value={this.state.selectedUser} options={this.state.users} simpleValue={false} onChange={::this.handleUserChange} />
 	      </Col>
 	      <Col sm={12} md={12}><br/><hr/><br/>
-		      <h3>Average Score: <small></small></h3>
+		      <h3>Average Score: {this.state.average}</h3>
 	      </Col>
-	      <Col sm={5} md={5}>
+	      <Col sm={4} md={4}>
 	      	      <TripsTable onSelect={::this.handleTripChange} data={this.state.trips}/>
 	      </Col>
-	      <Col sm={7} md={7}><TripMap2 events={this.state.events}/></Col>
+	      <Col sm={7} md={7}>
+		      <TripMap2 events={this.state.events} trip={this.state.selectedTripObj}/>
+	      </Col>
       </div>
   )
   }
